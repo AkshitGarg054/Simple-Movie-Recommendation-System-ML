@@ -4,6 +4,7 @@ import pickle
 import requests
 from dotenv import load_dotenv
 import os 
+import gdown
 
 load_dotenv()
 api_key = os.getenv("TMDB_API_KEY")
@@ -32,6 +33,14 @@ def recommend(movie):
 
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
+
+file_id = "1OZpC5j3uyg6Cq12cetSoetqrizTkY7Il" 
+url = f"https://drive.google.com/uc?id={file_id}"
+output = "movie_similarity.pkl"
+
+if not os.path.exists(output): 
+    gdown.download(url, output, quiet=False)
+
 
 similarity = pickle.load(open('movie_similarity.pkl', 'rb'))
 
